@@ -14,7 +14,17 @@ ABoot::ABoot()
 void ABoot::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	CollisionBox = this->FindComponentByClass<UShapeComponent>();
+
+	if (CollisionBox)
+	{
+		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &ABoot::OnOverlap);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Ball no collision box"));
+	}
 }
 
 // Called every frame
@@ -29,5 +39,14 @@ void ABoot::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void ABoot::OnOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
+{
+	if (OtherActor->IsA(ABall::StaticClass()))
+	{
+		OtherActor->FindComponentByClass<UStaticMeshComponent>()->SetSimulatePhysics(true);
+		OtherActor->FindComponentByClass<UStaticMeshComponent>()->SetPhysicsLinearVelocity((OtherActor->GetActorLocation() - GetActorLocation()) * 10);
+	}
 }
 
