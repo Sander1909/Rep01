@@ -22,6 +22,9 @@ public:
 	UPROPERTY(EditAnywhere)
 		UShapeComponent* CollisionBox = nullptr;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float launchPower = 0;
+
 
 protected:
 	// Called when the game starts or when spawned
