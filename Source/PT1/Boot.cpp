@@ -46,7 +46,7 @@ void ABoot::OnOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherA
 	if (OtherActor->IsA(ABall::StaticClass()))
 	{
 		OtherActor->FindComponentByClass<UStaticMeshComponent>()->SetSimulatePhysics(true);
-		OtherActor->FindComponentByClass<UStaticMeshComponent>()->SetPhysicsLinearVelocity((OtherActor->GetActorLocation() - GetActorLocation()) * launchPower / 10);
+		OtherActor->FindComponentByClass<UStaticMeshComponent>()->SetPhysicsLinearVelocity((OtherActor->GetActorLocation() - spherePosition) * launchPower / 40);
 	}
 }
 

@@ -25,6 +25,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float launchPower = 0;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FVector spherePosition = FVector(0, 0, 0);
+
 
 protected:
 	// Called when the game starts or when spawned
